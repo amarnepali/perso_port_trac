@@ -1,0 +1,37 @@
+
+
+
+.app {
+  display: flex;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  width: 200px;
+  background: #333;
+  color: white;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 1rem 0;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.navbar {
+  background: #eee;
+  padding: 1rem;
+}
+
+.content {
+  padding: 2rem;
+}
