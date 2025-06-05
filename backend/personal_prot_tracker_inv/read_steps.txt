@@ -1,0 +1,22 @@
+1. first intalled postgres in docker using command 
+    docker pull postgres   // pull the latest 17.5  checked command "docker exec-it postgresql bash" "psql --version"
+    docker run -itd -e POSTGRES_USER=amar -e POSTGRES_PASSWORD=amar -p 5432:5432 -v ./data:/var/lib/postgresql/data --name postgresql postgres
+
+    check in docker : psql -h localhost -p 5432 -U amar
+
+2. installed postgresql drive and environemnd variable loader:
+ the psycopg2 library, which acts as the PostgreSQL adapter for Python. Update the DATABASES setting in your Django settings.py file to configure PostgreSQL with the required credentials like database name, user, password, host, and port
+    pip install psycopg2-binary python-decouple
+
+
+3. create database in psql 
+
+    docker exec -it postgres bash
+    psql -U amar
+
+
+    CREATE DATABASE personalporttracker;
+    CREATE USER amar WITH PASSWORD 'amar';
+    GRANT ALL PRIVILEGES ON DATABASE personalPortTracker TO amar;
+
+
