@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "rest_framework",
+    "rest_framework",
     "app",  # Your app name
+    "drf_yasg",  # For API documentation django rest swagger/openAPI
+    
 
 ]
 

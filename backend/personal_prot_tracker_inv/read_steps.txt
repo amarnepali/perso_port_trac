@@ -20,3 +20,8 @@
     GRANT ALL PRIVILEGES ON DATABASE personalPortTracker TO amar;
 
 
+4. after any change in models, run makemigration app command
+    python manage.py makemigrations app
+
+    and to update the changes in database run migrate command 
+    python manage.py migrate
