@@ -54,10 +54,16 @@ urlpatterns = [
 
     path("admin/", admin.site.urls),
     # path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path('api/', include('app.app_urls')),  # Include the app's URLs
+    # path('api/', include('app.app_urls')),  # Include the app's URLs
     # DRF-YASG URLs for API documentation
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+# Add this line to include your portfolio app's URLs
+    # All URLs from the portfolio app will now be prefixed with 'api/portfolio/'
+    path('api/portfolio/', include('portfolio.urls')),
+    
+    
 
 ]
