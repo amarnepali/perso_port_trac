@@ -13,4 +13,6 @@ urlpatterns = [
     # URL for listing and creating transactions for the current user
     # GET, POST /api/portfolio/transactions/
     path('transactions/', views.TransactionListCreate.as_view(), name='transaction-list-create'),
+    path('watchlist/', views.WatchlistListCreateView.as_view(), name='watchlist-list-create'),
+    path('watchlist/<int:pk>/', views.WatchlistItemDestroyView.as_view(), name='watchlist-item-destroy'),
 ]

@@ -4,3 +4,7 @@ from django.apps import AppConfig
 class PortfolioConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "portfolio"
+
+    # Add this ready method to import and register the signals
+    def ready(self):
+        import portfolio.signals

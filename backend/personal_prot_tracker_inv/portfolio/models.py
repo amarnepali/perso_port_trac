@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 from django.db.models import UniqueConstraint
 
 # Represents a stock, crypto, etc.
+# The Asset model is now simpler. It's just a verified ticker.
+# yfinance will give us the name and other data.
 class Asset(models.Model):
-    ticker = models.CharField(max_length=10, unique=True)
-    name = models.CharField(max_length=100)
-    # You could add asset type (stock, crypto, etc.) here
+    ticker = models.CharField(max_length=20, unique=True)
+    # name = models.CharField(max_length=100)
+    # # You could add asset type (stock, crypto, etc.) here
     # asset_type = models.CharField(max_length=10, default='STOCK')
 
     def __str__(self):
@@ -56,3 +58,19 @@ class PortfolioAsset(models.Model):
 
     def __str__(self):
         return f"{self.quantity} of {self.asset.ticker} in {self.portfolio.name}"
+    
+
+
+# NEW MODEL: The user's watchlist
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='watchlist')
+    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
+
+    class Meta:
+        # A user can only have a specific asset on their watchlist once.
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'asset'], name='unique_user_asset_watchlist')
+        ]
+
+    def __str__(self):
+        return f"{self.user.username}'s watchlist: {self.asset.ticker}"

@@ -2,11 +2,12 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import generics, permissions
-from .models import Asset, Portfolio, Transaction
+from .models import Asset, Portfolio, Transaction, Watchlist
 from .serializers import (
     AssetSerializer,
     PortfolioSerializer,
-    TransactionSerializer
+    TransactionSerializer,
+    WatchlistSerializer
 
 )
 
@@ -63,3 +64,17 @@ class TransactionListCreate(generics.ListCreateAPIView):
         
        
 
+class WatchlistListCreateView(generics.ListCreateAPIView):
+    serializer_class = WatchlistSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        """Return watchlist items for the current user."""
+        return Watchlist.objects.filter(user=self.request.user)
+
+class WatchlistItemDestroyView(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_queryset(self):
+        """Ensure users can only delete their own watchlist items."""
+        return Watchlist.objects.filter(user=self.request.user)
