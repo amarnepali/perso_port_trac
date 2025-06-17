@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "app",  # Your app name
     "drf_yasg",  # For API documentation django rest swagger/openAPI
-    
+    "users",
+    "portfolio"
 
 ]
 
