@@ -1,0 +1,11 @@
+Django~=5.0
+djangorestframework~=3.15
+psycopg2-binary~=2.9 # For PostgreSQL
+python-dotenv~=1.0 # For managing environment variables securely
+drf-yasg~=1.21 # For API documentation (optional but highly recommended for REST APIs)
+jangorestframework-simplejwt
+dj-rest-auth
+django-cors-headers
+django-allauth    #dependency for dj-rest-auth
+requests
+yfinance

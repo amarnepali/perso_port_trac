@@ -11,7 +11,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     try:
-        instance.userprofile.save()
+        instance.profile.save()
     except Profile.DoesNotExist:
         # If the UserProfile does not exist, we can create it
         Profile.objects.create(user=instance)

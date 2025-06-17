@@ -64,6 +64,18 @@ urlpatterns = [
     # All URLs from the portfolio app will now be prefixed with 'api/portfolio/'
     path('api/portfolio/', include('portfolio.urls')),
     
+    # Add the dj-rest-auth URLs
+    # This will provide endpoints like:
+    # /api/auth/login/
+    # /api/auth/logout/
+    # /api/auth/user/ (to get current user details)
+    # /api/auth/password/reset/
+    # etc.
+    path('api/auth/', include('dj_rest_auth.urls')),
     
+    # Add the registration URL
+    # This will provide the endpoint:
+    # /api/auth/registration/
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
 
 ]

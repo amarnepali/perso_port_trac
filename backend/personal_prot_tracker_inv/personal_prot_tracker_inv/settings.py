@@ -41,10 +41,21 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "app",  # Your app name
+#  3rd party apps
+    "rest_framework.authtoken",  # For token authentication
+    "dj_rest_auth",  # For user authentication
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",  # For social authentication
+    "dj_rest_auth.registration",  # For user registration
+    "corsheaders",  # For handling CORS
+
+
+#   Local apps
+    # "app",  # Your app name
     "drf_yasg",  # For API documentation django rest swagger/openAPI
-    "users",
-    "portfolio"
+    "users.apps.UsersConfig",  # User management app
+    "portfolio.apps.PortfolioConfig",  # Portfolio management ap
 
 ]
 
@@ -56,6 +67,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # add the allauth middleware
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "personal_prot_tracker_inv.urls"
@@ -141,5 +155,25 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+
+    ),
 }
+
+#dj-rest-auth settings
+REST_AUTH = {
+    'USE_JWT': True,  # Use JWT for authentication
+    'JWT_AUTH_HTTPONLY': False,  # Use 'Bearer' prefix for JWT}
+    }
+
+# This is required for dj-rest-auth's registration feature
+SITE_ID = 1
+
+# This allows users to register using only an email and password
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none' # For development, we'll turn off email verification
